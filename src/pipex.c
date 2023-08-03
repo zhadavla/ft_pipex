@@ -6,7 +6,7 @@
 /*   By: mnurlybe <mnurlybe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 18:56:41 by vzhadan           #+#    #+#             */
-/*   Updated: 2023/08/03 20:16:49 by mnurlybe         ###   ########.fr       */
+/*   Updated: 2023/08/03 20:51:24 by mnurlybe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,3 @@ int main(int argc, char **argv, char **env)
     waitpid(pid[1], NULL, 0);
     return (0);
 }
-
