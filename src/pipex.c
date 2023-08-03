@@ -6,7 +6,7 @@
 /*   By: mnurlybe <mnurlybe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 18:56:41 by vzhadan           #+#    #+#             */
-/*   Updated: 2023/08/03 19:02:35 by mnurlybe         ###   ########.fr       */
+/*   Updated: 2023/08/03 20:16:49 by mnurlybe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void child_process_one(char **argv, int *pipe_end, char **env)
     
     fd_infile = open(argv[1], O_RDONLY);
     dup2(fd_infile, STDIN_FILENO);
-    close(fd_infile);
     dup2(pipe_end[1], STDOUT_FILENO);
     close(pipe_end[1]);
     close(pipe_end[0]);
+    close(fd_infile);
     
     ft_execute(argv[2], env);
     
@@ -32,14 +32,13 @@ void child_process_two(char **argv, int *pipe_end, char **env)
 {
     int fd_outfile;
     
-    fd_outfile = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC);
+    fd_outfile = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0777);
     
     dup2(fd_outfile, STDOUT_FILENO);
-    close(fd_outfile);
-    
     dup2(pipe_end[0], STDIN_FILENO);
     close(pipe_end[PIPE_IN]);
     close(pipe_end[PIPE_OUT]);
+    close(fd_outfile);
 
     ft_execute(argv[3], env);
 }
