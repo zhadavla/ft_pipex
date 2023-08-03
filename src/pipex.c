@@ -6,7 +6,7 @@
 /*   By: vzhadan <vzhadan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 18:56:41 by vzhadan           #+#    #+#             */
-/*   Updated: 2023/08/03 18:14:36 by vzhadan          ###   ########.fr       */
+/*   Updated: 2023/08/03 18:47:32 by vzhadan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void child_process_two(char **argv, int *pipe_end, char **env)
 }
 
 int main(int argc, char **argv, char **env)
-{
+{    
     if (argc != 5)
         return (0);
     int pipe_end[2];
