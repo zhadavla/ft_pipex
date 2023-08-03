@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzhadan <vzhadan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mnurlybe <mnurlybe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 18:06:43 by vzhadan           #+#    #+#             */
-/*   Updated: 2023/08/03 18:56:37 by vzhadan          ###   ########.fr       */
+/*   Updated: 2023/08/03 19:02:02 by mnurlybe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,5 @@
  * from the PATH variable in the environment
 */
 char **get_binaries(char **env);
-
+void ft_execute(char *argv, char **env);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzhadan <vzhadan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mnurlybe <mnurlybe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 18:56:41 by vzhadan           #+#    #+#             */
-/*   Updated: 2023/08/03 18:47:32 by vzhadan          ###   ########.fr       */
+/*   Updated: 2023/08/03 19:02:35 by mnurlybe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void child_process_one(char **argv, int *pipe_end, char **env)
 {
     int fd_infile;
-    char *cmd1[] = {"cat", NULL};
     
     fd_infile = open(argv[1], O_RDONLY);
     dup2(fd_infile, STDIN_FILENO);
@@ -24,7 +23,7 @@ void child_process_one(char **argv, int *pipe_end, char **env)
     close(pipe_end[1]);
     close(pipe_end[0]);
     
-    execve("/bin/cat", cmd1, env);
+    ft_execute(argv[2], env);
     
     //add error handler, free and exit for fd, dup2, execve; 
 }
@@ -32,7 +31,6 @@ void child_process_one(char **argv, int *pipe_end, char **env)
 void child_process_two(char **argv, int *pipe_end, char **env)
 {
     int fd_outfile;
-    char *cmd2[] = {"cat", NULL};
     
     fd_outfile = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC);
     
@@ -43,7 +41,7 @@ void child_process_two(char **argv, int *pipe_end, char **env)
     close(pipe_end[PIPE_IN]);
     close(pipe_end[PIPE_OUT]);
 
-    execve("/bin/cat", cmd2, env);
+    ft_execute(argv[3], env);
 }
 
 int main(int argc, char **argv, char **env)
