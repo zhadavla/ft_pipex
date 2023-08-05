@@ -6,7 +6,7 @@
 /*   By: mnurlybe <mnurlybe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 18:06:43 by vzhadan           #+#    #+#             */
-/*   Updated: 2023/08/03 19:02:02 by mnurlybe         ###   ########.fr       */
+/*   Updated: 2023/08/05 14:59:46 by mnurlybe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,18 @@
 
 # define PIPE_IN 0
 # define PIPE_OUT 1
+
+typedef struct s_pipex
+{
+    int fd_count;
+    int cmd_count;
+    int infile_fd;
+    int outfile_fd;
+    int *fd;
+    int j;
+}   t_pipex;
+
+
 
 /*
  * returns an array of possible paths to the comands 
