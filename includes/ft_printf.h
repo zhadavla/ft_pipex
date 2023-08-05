@@ -6,7 +6,7 @@
 /*   By: vzhadan <vzhadan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 20:18:04 by vzhadan           #+#    #+#             */
-/*   Updated: 2023/03/09 20:18:05 by vzhadan          ###   ########.fr       */
+/*   Updated: 2023/08/05 17:09:24 by vzhadan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
-# include "libft.h"
+# include "../libft/libft.h"
 
 typedef struct flags
 {

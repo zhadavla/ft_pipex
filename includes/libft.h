@@ -6,7 +6,7 @@
 /*   By: vzhadan <vzhadan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 16:20:44 by vzhadan           #+#    #+#             */
-/*   Updated: 2023/07/10 18:16:17 by vzhadan          ###   ########.fr       */
+/*   Updated: 2023/08/05 17:54:32 by vzhadan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define LIBFT_H
 # include <stdlib.h>
 # include <unistd.h>
-
+# include "get_next_line/get_next_line.h"
+# include "ft_printf/ft_printf.h"
 typedef struct s_list
 {
 	void			*content;
@@ -52,7 +53,7 @@ char	**ft_split(char const *s, char c);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *s);
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
-char	*ft_strjoin(char const *s1, char const *s2);
+// char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 size_t	ft_strlen(const char *s);
