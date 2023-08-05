@@ -6,7 +6,7 @@
 /*   By: mnurlybe <mnurlybe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 17:55:03 by mnurlybe          #+#    #+#             */
-/*   Updated: 2023/08/05 17:57:20 by mnurlybe         ###   ########.fr       */
+/*   Updated: 2023/08/05 21:12:53 by mnurlybe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ void init(t_pipex *pipex, int argc, char **argv)
     pipex->fd_count = (argc - 1) * 2;
     pipex->cmd_count = argc - 3;
     pipex->infile_fd = open(argv[1], O_RDONLY);
-    pipex->outfile_fd = open(argv[argc-1], O_WRONLY | O_CREAT | O_TRUNC, 0777);
+    pipex->outfile_fd = open(argv[argc-1], O_WRONLY | O_CREAT | O_TRUNC, 0777); 
     pipex->fd = (int*)malloc(sizeof(int) * pipex->fd_count);
+    pipex->is_heredoc = false;
 }
 
 void    close_fd(t_pipex *pipex)
