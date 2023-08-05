@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnurlybe <mnurlybe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vzhadan <vzhadan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 13:14:44 by mnurlybe          #+#    #+#             */
-/*   Updated: 2023/08/05 17:57:59 by mnurlybe         ###   ########.fr       */
+/*   Updated: 2023/08/05 18:37:58 by vzhadan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,34 @@ void fork_and_execute(t_pipex *pipex, int argc, char **argv, char **env)
     }
 }
 
+void heredoc(t_pipex *pipex, char *limiter, char **env)
+{
+    char *line;
+    int fd;
+
+    fd = open("tmpfile", O_CREATE | O_APPEND);
+    ft_printf("heredoc> ");
+    line = get_next_line(0);
+    while (!ft_strncmp(line, limiter, ft_strlen(limiter) + 1))
+    {
+        write(fd, line, ft_strlen(line) + 1);
+        ft_printf("heredoc> ");
+        line = get_next_line(0);
+    }
+}
+
 int main(int argc, char **argv, char **env)
 {
     int status;
     t_pipex pipex;
     init(&pipex, argc, argv);
     
+    if (ft_strncmp(argv[1], "here_doc", 7) == 0){
+        heredoc(&pipex, argv[2], env);
+        
+    }
+        
+        
     if (argc < 5)
         return (1);
     
