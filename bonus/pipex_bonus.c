@@ -6,7 +6,7 @@
 /*   By: vzhadan <vzhadan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 13:14:44 by mnurlybe          #+#    #+#             */
-/*   Updated: 2023/08/05 18:37:58 by vzhadan          ###   ########.fr       */
+/*   Updated: 2023/08/05 19:03:11 by vzhadan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,16 @@ void heredoc(t_pipex *pipex, char *limiter, char **env)
 {
     char *line;
     int fd;
+    int len;
 
-    fd = open("tmpfile", O_CREATE | O_APPEND);
-    ft_printf("heredoc> ");
-    line = get_next_line(0);
-    while (!ft_strncmp(line, limiter, ft_strlen(limiter) + 1))
+    fd = open("tmpfile", O_WRONLY | O_CREAT | O_APPEND, 0777);
+    while (1)
     {
-        write(fd, line, ft_strlen(line) + 1);
         ft_printf("heredoc> ");
         line = get_next_line(0);
+        write(fd, line, ft_strlen(line));
+        if (!ft_strncmp(line, limiter, ft_strlen(limiter)))
+            exit(EXIT_SUCCESS);
     }
 }
 
