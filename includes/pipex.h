@@ -6,7 +6,7 @@
 /*   By: mnurlybe <mnurlybe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 18:06:43 by vzhadan           #+#    #+#             */
-/*   Updated: 2023/08/05 14:59:46 by mnurlybe         ###   ########.fr       */
+/*   Updated: 2023/08/05 17:53:39 by mnurlybe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@
 # define PIPE_IN 0
 # define PIPE_OUT 1
 
+# define FIRST_FORK 1
+# define MID_FORK 2
+# define LAST_FORK 3
+
 typedef struct s_pipex
 {
     int fd_count;
@@ -32,7 +36,7 @@ typedef struct s_pipex
     int infile_fd;
     int outfile_fd;
     int *fd;
-    int j;
+    int fd_ind;
 }   t_pipex;
 
 
@@ -43,4 +47,9 @@ typedef struct s_pipex
 */
 char **get_binaries(char **env);
 void ft_execute(char *argv, char **env);
+void    ft_dup2(int fd1, int fd2);
+void    close_fd(t_pipex *pipex);
+void init(t_pipex *pipex, int argc, char **argv);
+
+
 #endif
