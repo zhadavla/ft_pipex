@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzhadan <vzhadan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mnurlybe <mnurlybe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 20:18:04 by vzhadan           #+#    #+#             */
-/*   Updated: 2023/08/05 17:09:24 by vzhadan          ###   ########.fr       */
+/*   Updated: 2023/08/05 19:14:34 by mnurlybe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
-# include "../libft/libft.h"
+# include "libft.h"
 
 typedef struct flags
 {

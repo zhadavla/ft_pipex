@@ -6,7 +6,7 @@
 /*   By: mnurlybe <mnurlybe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 13:14:44 by mnurlybe          #+#    #+#             */
-/*   Updated: 2023/08/07 15:27:46 by mnurlybe         ###   ########.fr       */
+/*   Updated: 2023/08/07 17:46:13 by mnurlybe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,33 +60,36 @@ void heredoc(t_pipex *pipex)
     {
         ft_printf("heredoc> ");
         line = get_next_line(0);
-        write(pipex->infile_fd, line, ft_strlen(line));
+        write(pipex->fd_pipes[1], line, ft_strlen(line));
         if (!ft_strncmp(line, pipex->limiter, ft_strlen(pipex->limiter)))
-            // exit(EXIT_SUCCESS);
+        {
+            free(line);
             break;
+        }
+        free(line);
     }
+    // close(pipex->fd_pipes[1]); ???
 }
 
 void do_fork_names(t_pipex *pipex, int mode, char *cmd, char **env)
 {
     if (fork() == 0)
     {
-        // printf("do fork\n");
         if (mode == FIRST_FORK)
         {
-            printf("file fd: %d\n", pipex->infile_fd);
-            printf("first command\n");
-            ft_dup2(pipex->infile_fd, pipex->fd_pipes[1]);
+            if (pipex->is_heredoc)
+                ft_dup2(pipex->fd_pipes[0], pipex->fd_pipes[3]);
+            else
+                ft_dup2(pipex->infile_fd, pipex->fd_pipes[1]);
         }
         if (mode == MID_FORK)
-        {
-            printf("middle command\n");
             ft_dup2(pipex->fd_pipes[pipex->fd_ind], pipex->fd_pipes[pipex->fd_ind + 3]);
-        }
         if (mode == LAST_FORK)
         {
-            printf("last command\n");
-            ft_dup2(pipex->fd_pipes[pipex->fd_ind], pipex->outfile_fd);
+            if (pipex->is_heredoc)
+                ft_dup2(pipex->fd_pipes[2], pipex->outfile_fd);
+            else
+                ft_dup2(pipex->fd_pipes[pipex->fd_ind], pipex->outfile_fd);
         }
         close_fd(pipex);
         ft_execute(cmd, env);
@@ -118,6 +121,7 @@ void execute_command(t_pipex *pipex, int num_of_commands, char **list_of_command
 
     if (pipex->is_heredoc)
         heredoc(pipex);
+        
     j = 0;
     pipex->fd_ind = 0;
     while (j < num_of_commands)
@@ -173,7 +177,7 @@ int main(int argc, char **argv, char **env)
         pipex.infile_name = "here_doc";
         pipex.outfile_name = argv[argc - 1];
         pipex.limiter = argv[2];
-        pipex.fd_pipes_count = 2;
+        pipex.fd_pipes_count = 4;
         pipex.is_heredoc = true;
         pipex.cmd_count = 2;
     }
@@ -182,9 +186,9 @@ int main(int argc, char **argv, char **env)
         pipex.outfile_name = argv[argc - 1];
     }
     
-    printf("fd_pipes_count: %d\n", pipex.fd_pipes_count);
-    printf("in_name: %s\n", pipex.infile_name);
-    printf("out_name: %s\n", pipex.outfile_name);
+    // printf("fd_pipes_count: %d\n", pipex.fd_pipes_count);
+    // printf("in_name: %s\n", pipex.infile_name);
+    // printf("out_name: %s\n", pipex.outfile_name);
         
     int i = 0;
     while (i < pipex.fd_pipes_count)
@@ -192,10 +196,11 @@ int main(int argc, char **argv, char **env)
         pipe(pipex.fd_pipes + i);
         i += 2;
     }
+
     
     list_of_commands = create_list_of_commands(argv, argc, &pipex);
     execute_command(&pipex, pipex.cmd_count, list_of_commands, env);
-    // fork_and_execute(&pipex, argc, argv, env);
+
     close_fd(&pipex);
     close(pipex.infile_fd);
     close(pipex.outfile_fd);

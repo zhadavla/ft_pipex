@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzhadan <vzhadan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mnurlybe <mnurlybe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 16:20:44 by vzhadan           #+#    #+#             */
-/*   Updated: 2023/08/05 17:54:32 by vzhadan          ###   ########.fr       */
+/*   Updated: 2023/08/05 18:30:58 by mnurlybe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define LIBFT_H
 # include <stdlib.h>
 # include <unistd.h>
-# include "get_next_line/get_next_line.h"
-# include "ft_printf/ft_printf.h"
+# include "get_next_line.h"
+# include "ft_printf.h"
 typedef struct s_list
 {
 	void			*content;

@@ -6,7 +6,7 @@
 #    By: mnurlybe <mnurlybe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/02 18:59:24 by vzhadan           #+#    #+#              #
-#    Updated: 2023/08/03 21:49:52 by mnurlybe         ###   ########.fr        #
+#    Updated: 2023/08/05 19:15:01 by mnurlybe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SOURCES = $(wildcard $(SRC_DIR)/*.c)
 BONUS = $(wildcard $(BONUS_DIR)/*.c)
 
 # CFLAGS = -Wall -Wextra -Werror
-LIBFLAGS = -L./lib -lftprintf -lft -ldl -lglfw -pthread -lm
+LIBFLAGS = -L./lib -lft -ldl -lglfw -pthread -lm
 MY_HEADER = ./includes/
 
 OBJ_DIR = obj
