@@ -6,7 +6,7 @@
 /*   By: mnurlybe <mnurlybe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 17:55:03 by mnurlybe          #+#    #+#             */
-/*   Updated: 2023/08/07 15:14:54 by mnurlybe         ###   ########.fr       */
+/*   Updated: 2023/08/07 18:22:04 by mnurlybe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,23 @@
 
 void init(t_pipex *pipex, int argc, char **argv)
 {
-    pipex->cmd_count = argc - 3;
-    pipex->fd_pipes_count = (pipex->cmd_count - 1) * 2;
-    pipex->infile_fd = open(argv[1], O_RDONLY);
-    pipex->outfile_fd = open(argv[argc-1], O_WRONLY | O_CREAT | O_TRUNC, 0777); 
+
+    if (ft_strncmp(argv[1], "here_doc", 8) == 0)
+    {
+        pipex->limiter = argv[2];
+        pipex->fd_pipes_count = 4;
+        pipex->is_heredoc = true;
+        pipex->cmd_count = 2;
+    }
+    else
+    {
+        pipex->cmd_count = argc - 3;
+        pipex->infile_name = argv[1];
+        pipex->fd_pipes_count = (pipex->cmd_count - 1) * 2;
+        pipex->is_heredoc = false;
+    }
+    pipex->outfile_name = argv[argc - 1];
     pipex->fd_pipes = (int*)malloc(sizeof(int) * pipex->fd_pipes_count);
-    pipex->is_heredoc = false;
 }
 
 void    close_fd(t_pipex *pipex)
