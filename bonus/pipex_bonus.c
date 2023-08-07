@@ -49,7 +49,7 @@ void do_fork_names(t_pipex *pipex, int mode, char *cmd, char **env)
             if (pipex->is_heredoc)
                 ft_dup2(pipex->fd_pipes[2], pipex->outfile_fd);
             else
-                ft_dup2(pipex->fd_pipes[pipex->fd_ind], pipex->outfile_fd);
+                ft_dup2(pipex->fd_pipes[pipex->fd_i nd], pipex->outfile_fd);
         }
         close_fd(pipex);
         ft_execute(cmd, env);
