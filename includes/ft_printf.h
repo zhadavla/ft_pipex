@@ -48,9 +48,7 @@ typedef struct specifiers
 
 void			ft_init(t_flags *flags, t_specifiers *sp);
 size_t			ft_strlcpy(char *dst, const char *src, size_t size);
-size_t			ft_strlen(const char *s);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
-char			*ft_strchr(const char *s, int c);
 int				ft_isdigit(int c);
 int				ft_putstr(char *str);
 size_t			ft_find_nod(unsigned int num, int system);
@@ -69,8 +67,6 @@ int				ft_putstr_utils(char *str, int j);
 int				ft_putspace(int j);
 int				ft_putzero(int j);
 int				ft_putsigns(t_flags *flags, t_specifiers *sp);
-char			*ft_number_to_str_l(long long unsigned num,
-					char letter, int system);
 void			ft_switch_for_flags(char c, t_flags *flags);
 void			ft_switch_for_sp(char c, t_specifiers *sp);
 void			ft_add_to_number(char c, int *prev_number);
