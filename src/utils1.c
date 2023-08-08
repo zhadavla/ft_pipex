@@ -6,7 +6,7 @@
 /*   By: vzhadan <vzhadan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 20:29:17 by vzhadan           #+#    #+#             */
-/*   Updated: 2023/08/08 20:29:24 by vzhadan          ###   ########.fr       */
+/*   Updated: 2023/08/08 20:40:56 by vzhadan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,12 @@ char	*ft_join(char const *s1, char const *s2)
 	ft_strlcpy(str, s1, len1 + 1);
 	ft_strlcat(str, s2, len2 + len1 + 1);
 	return (str);
+}
+
+void	ft_close(t_pipex *pipex)
+{
+	close_fd(pipex);
+	if (pipex->infile_name)
+		close(pipex->infile_fd);
+	close(pipex->outfile_fd);
 }

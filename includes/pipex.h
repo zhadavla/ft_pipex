@@ -6,7 +6,7 @@
 /*   By: vzhadan <vzhadan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 18:06:43 by vzhadan           #+#    #+#             */
-/*   Updated: 2023/08/08 20:28:40 by vzhadan          ###   ########.fr       */
+/*   Updated: 2023/08/08 20:40:25 by vzhadan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void		heredoc(t_pipex *pipex);
 void		init_pipex(t_pipex *pipex, int argc, char **argv);
 int			open_file(char *filename, BOOL is_heredoc, BOOL is_input);
 void		free_split(char **strs);
+void		ft_close(t_pipex *pipex);
 char		*ft_join(char const *s1, char const *s2);
 char		**create_cmd_list(char **argv, int argc, t_pipex *pipex);
 int			check_argv(char **argv, int argc, t_pipex *pipex, char **env);

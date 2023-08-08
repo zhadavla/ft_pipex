@@ -6,7 +6,7 @@
 /*   By: vzhadan <vzhadan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 13:14:44 by mnurlybe          #+#    #+#             */
-/*   Updated: 2023/08/08 20:29:55 by vzhadan          ###   ########.fr       */
+/*   Updated: 2023/08/08 20:41:42 by vzhadan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	open_error_check(t_pipex *pipex)
 {
 	if (pipex->infile_name)
 		pipex->infile_fd = open_file(pipex->infile_name, pipex->is_heredoc, 1);
-
 	pipex->outfile_fd = open_file(pipex->outfile_name, pipex->is_heredoc, 0);
 	if ((pipex->infile_name && pipex->infile_fd == -1)
 		|| pipex->outfile_fd == -1)
@@ -86,6 +85,23 @@ int	execute_command(t_pipex *pipex, int num_of_commands, char **cmd_list,
 	return (1);
 }
 
+int	create_pipes(t_pipex *pipex)
+{
+	int	i;
+
+	i = 0;
+	while (i < pipex->fd_pipes_count)
+	{
+		if (pipe(pipex->fd_pipes + i) == -1)
+		{
+			free(pipex->fd_pipes);
+			return (-1);
+		}
+		i += 2;
+	}
+	return (1);
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	int		status;
@@ -93,23 +109,9 @@ int	main(int argc, char **argv, char **env)
 	t_pipex	pipex;
 	int		i;
 
-	
-	if (check_argv(argv, argc, &pipex, env) == -1)
-	{
-		perror("");
-		return (EXIT_FAILURE);
-	}
 	init_pipex(&pipex, argc, argv);
-	i = 0;
-	while (i < pipex.fd_pipes_count)
-	{
-		if (pipe(pipex.fd_pipes + i) == -1)
-		{
-			free(pipex.fd_pipes);
-			return (EXIT_FAILURE);
-		}
-		i += 2;
-	}
+	if (check_argv(argv, argc, &pipex, env) == -1 || create_pipes(&pipex) == -1)
+		return (EXIT_FAILURE);
 	cmd_list = create_cmd_list(argv, argc, &pipex);
 	if (execute_command(&pipex, pipex.cmd_count, cmd_list, env) == -1)
 	{
@@ -117,16 +119,10 @@ int	main(int argc, char **argv, char **env)
 		perror("");
 		return (EXIT_FAILURE);
 	}
-	close_fd(&pipex);
-	if (pipex.infile_name)
-		close(pipex.infile_fd);
-	close(pipex.outfile_fd);
+	ft_close(&pipex);
 	i = 0;
-	while (i < pipex.cmd_count)
-	{
+	while (i++ < pipex.cmd_count)
 		wait(&status);
-		i++;
-	}
 	free(pipex.fd_pipes);
 	return (0);
 }
