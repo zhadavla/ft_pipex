@@ -160,7 +160,7 @@ bool command_check(char *str, char **env) {
         }
         free(pathname);
 
-        i++;        
+        i++;
     }
 //    free(pathname);
     free_split(cmd);
@@ -169,7 +169,6 @@ bool command_check(char *str, char **env) {
 }
 
 int check_argv(char **argv, int argc, t_pipex *pipex, char **env) {
-    (void )pipex;
     int i = 2;
     if (pipex->is_heredoc)
         i = 3;
@@ -183,8 +182,8 @@ int check_argv(char **argv, int argc, t_pipex *pipex, char **env) {
 }
 
 int main(int argc, char **argv, char **env) {
-//    int status;
-//    char **list_of_commands;
+    int status;
+    char **list_of_commands;
     t_pipex pipex;
 
     if (argc < 5) {
@@ -193,32 +192,34 @@ int main(int argc, char **argv, char **env) {
 
     if (ft_strncmp(argv[1], "here_doc", 8) == 0)
         pipex.is_heredoc = true;
+    else
+        pipex.is_heredoc = false;
     if (check_argv(argv, argc, &pipex, env) == -1) {
         perror("");
         return (EXIT_FAILURE);
     }
 //
-//    init_pipex(&pipex, argc, argv);
-//    int i = 0;
-//    while (i < pipex.fd_pipes_count) {
-//        if (pipe(pipex.fd_pipes + i) == -1)
-//            return (EXIT_FAILURE);
-//        i += 2;
-//    }
-//    list_of_commands = create_list_of_commands(argv, argc, &pipex);
-//    if (execute_command(&pipex, pipex.cmd_count, list_of_commands, env) == -1) {
-//        perror("");
-//        return (EXIT_FAILURE);
-//    }
-//    close_fd(&pipex);
-//    if (pipex.infile_name)
-//        close(pipex.infile_fd);
-//    close(pipex.outfile_fd);
-//    i = 0;
-//    while (i < pipex.cmd_count) {
-//        wait(&status);
-//        i++;
-//    }
-//    free(pipex.fd_pipes);
+    init_pipex(&pipex, argc, argv);
+    int i = 0;
+    while (i < pipex.fd_pipes_count) {
+        if (pipe(pipex.fd_pipes + i) == -1)
+            return (EXIT_FAILURE);
+        i += 2;
+    }
+    list_of_commands = create_list_of_commands(argv, argc, &pipex);
+    if (execute_command(&pipex, pipex.cmd_count, list_of_commands, env) == -1) {
+        perror("");
+        return (EXIT_FAILURE);
+    }
+    close_fd(&pipex);
+    if (pipex.infile_name)
+        close(pipex.infile_fd);
+    close(pipex.outfile_fd);
+    i = 0;
+    while (i < pipex.cmd_count) {
+        wait(&status);
+        i++;
+    }
+    free(pipex.fd_pipes);
     return (0);
 }

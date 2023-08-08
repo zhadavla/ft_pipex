@@ -58,26 +58,29 @@ char **get_binaries(char **env) {
 }
 
 bool ft_execute(char *str, char **env) {
-    char **cmd;
-    char **path;
-    char *pathname;
-    int i;
+        char **cmd;
+        char **path;
+        char *pathname;
+        int i;
 
-    cmd = ft_split(str, ' ');
-    path = get_binaries(env);
-    i = 0;
-    while (path[i] != NULL) {
-        pathname = ft_join(path[i], "/");
-        pathname = ft_strjoin(pathname, cmd[0]);
-        if (access(pathname, X_OK) == 0) {
-            free_split(path);
-            execve(pathname, cmd, env);
+        cmd = ft_split(str, ' ');
+        path = get_binaries(env);
+        i = 0;
+        while (path[i] != NULL) {
+            pathname = ft_join(path[i], "/");
+            pathname = ft_strjoin(pathname, cmd[0]);
+            if (access(pathname, X_OK) == 0) {
+                //free(pathname);
+                //free_split(cmd);
+                free_split(path);
+                execve(pathname, cmd, env);
+            }
+            free(pathname);
+            i++;
         }
-        i++;
+//    free(pathname);
+        free_split(cmd);
+        free_split(path);
+        return false;
     }
-    free(pathname);
-    free_split(cmd);
-    free_split(path);
-    return false;
-}
 
