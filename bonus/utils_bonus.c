@@ -16,10 +16,12 @@ void init_pipex(t_pipex *pipex, int argc, char **argv)
 {
     if (ft_strncmp(argv[1], "here_doc", 8) == 0)
     {
+        pipex->infile_name = NULL;
         pipex->limiter = argv[2];
         pipex->fd_pipes_count = 4;
         pipex->is_heredoc = true;
         pipex->cmd_count = 2;
+
     }
     else
     {
@@ -74,6 +76,5 @@ void ft_execute(char *argv, char **env) {
             execve(pathname, cmd, env);
         i++;
     }
-        free(pathname);
 }
 

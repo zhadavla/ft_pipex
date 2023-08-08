@@ -25,7 +25,6 @@ void heredoc(t_pipex *pipex) {
         }
         free(line);
     }
-//     close(pipex->fd_pipes[1]); // ???
 }
 
 void do_fork_names(t_pipex *pipex, int mode, char *cmd, char **env) {
@@ -47,8 +46,6 @@ void do_fork_names(t_pipex *pipex, int mode, char *cmd, char **env) {
         close_fd(pipex);
         ft_execute(cmd, env);
     }
-//    close(pipex->fd_pipes[1]);
-
 }
 
 int open_file(char *filename, bool is_heredoc, bool is_input) {
@@ -67,13 +64,13 @@ void execute_command(t_pipex *pipex, int num_of_commands, char **list_of_command
         pipex->infile_fd = open_file(pipex->infile_name, pipex->is_heredoc, 1);
     pipex->outfile_fd = open_file(pipex->outfile_name, pipex->is_heredoc, 0);
 
-    if (pipex->is_heredoc)
-        heredoc(pipex);
-
-    if (pipex->infile_fd == -1 || pipex->outfile_fd == -1){
+    if ((pipex->infile_name && pipex->infile_fd == -1) || pipex->outfile_fd == -1)
+    {
         perror("Error when opening file");
         return;
     }
+    if (pipex->is_heredoc)
+        heredoc(pipex);
     j = 0;
     pipex->fd_ind = 0;
     while (j < num_of_commands) {
@@ -102,28 +99,63 @@ char **create_list_of_commands(char **argv, int argc, t_pipex *pipex) {
     return commands;
 }
 
+bool argv_check(char *str, char **env)
+{
+    char **cmd;
+    char **path;
+
+    char *pathname;
+    int i;
+
+    cmd = ft_split(str, ' ');
+    path = get_binaries(env);
+    i = 0;
+    while (path[i] != NULL) {
+        pathname = ft_strjoin(path[i], "/");
+        pathname = ft_strjoin(pathname, cmd[0]);
+        if (access(pathname, X_OK) == 0)
+        {
+            i = 0;
+            while (cmd[i++])
+                free(cmd[i]);
+            free(pathname);
+            return true;
+        }
+        i++;
+    }
+    i = 0;
+    while (cmd[i++])
+        free(cmd[i]);
+    return false;
+}
+
 int main(int argc, char **argv, char **env) {
     int status;
     char **list_of_commands;
     t_pipex pipex;
-    init_pipex(&pipex, argc, argv);
 
-    if (argc < 5)
+    if (argc < 5) {
         return (1);
+    }
+
+//    if (!argv_check(argv, env)) {
+//        perror("");
+//        exit(EXIT_FAILURE);
+//    }
+
+    init_pipex(&pipex, argc, argv);
 
     int i = 0;
     while (i < pipex.fd_pipes_count) {
         pipe(pipex.fd_pipes + i);
         i += 2;
     }
-
     list_of_commands = create_list_of_commands(argv, argc, &pipex);
     execute_command(&pipex, pipex.cmd_count, list_of_commands, env);
-
     close_fd(&pipex);
-    close(pipex.infile_fd);
+    if (pipex.infile_name)
+        close(pipex.infile_fd);
     close(pipex.outfile_fd);
-
     i = 0;
     while (i < pipex.cmd_count) {
         wait(&status);
