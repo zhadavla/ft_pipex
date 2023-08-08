@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnurlybe <mnurlybe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vzhadan <vzhadan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 18:06:43 by vzhadan           #+#    #+#             */
-/*   Updated: 2023/08/07 15:49:37 by mnurlybe         ###   ########.fr       */
+/*   Updated: 2023/08/08 15:30:44 by vzhadan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,12 @@ typedef struct s_pipex
  * from the PATH variable in the environment
 */
 char **get_binaries(char **env);
-void ft_execute(char *argv, char **env);
-void    ft_dup2(int fd1, int fd2);
+bool ft_execute(char *argv, char **env);
+char	*ft_join(char const *s1, char const *s2);
+int    ft_dup2(int fd1, int fd2);
 void    close_fd(t_pipex *pipex);
-void init(t_pipex *pipex, int argc, char **argv);
+void free_split(char **strs);
+void init_pipex(t_pipex *pipex, int argc, char **argv);
 
 
 #endif
