@@ -6,7 +6,7 @@
 /*   By: mnurlybe <mnurlybe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 16:20:44 by vzhadan           #+#    #+#             */
-/*   Updated: 2023/08/05 18:30:58 by mnurlybe         ###   ########.fr       */
+/*   Updated: 2023/08/10 17:18:29 by mnurlybe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include "get_next_line.h"
 # include "ft_printf.h"
+
 typedef struct s_list
 {
 	void			*content;

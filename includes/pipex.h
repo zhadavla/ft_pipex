@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzhadan <vzhadan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mnurlybe <mnurlybe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 18:06:43 by vzhadan           #+#    #+#             */
-/*   Updated: 2023/08/08 20:40:25 by vzhadan          ###   ########.fr       */
+/*   Updated: 2023/08/10 17:19:41 by mnurlybe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 
 # define TRUE 1
 # define FALSE 0
-# define BOOL int
+//# define int int
 
 typedef struct s_pipex
 {
@@ -41,7 +41,7 @@ typedef struct s_pipex
 	int		outfile_fd;
 	int		*fd_pipes;
 	int		fd_ind;
-	BOOL	is_heredoc;
+	int	is_heredoc;
 	char	*infile_name;
 	char	*outfile_name;
 	char	*limiter;
@@ -52,18 +52,18 @@ typedef struct s_pipex
  * from the PATH variable in the environment
  */
 char		**get_binaries(char **env);
-BOOL		ft_execute(char *argv, char **env);
+int		ft_execute(char *argv, char **env);
 char		*ft_join(char const *s1, char const *s2);
 int			ft_dup2(int fd1, int fd2);
 void		close_fd(t_pipex *pipex);
 void		free_split(char **strs);
 void		heredoc(t_pipex *pipex);
 void		init_pipex(t_pipex *pipex, int argc, char **argv);
-int			open_file(char *filename, BOOL is_heredoc, BOOL is_input);
+int			open_file(char *filename, int is_heredoc, int is_input);
 void		free_split(char **strs);
 void		ft_close(t_pipex *pipex);
 char		*ft_join(char const *s1, char const *s2);
 char		**create_cmd_list(char **argv, int argc, t_pipex *pipex);
 int			check_argv(char **argv, int argc, t_pipex *pipex, char **env);
-BOOL		command_check(char *str, char **env);
+int		command_check(char *str, char **env);
 #endif

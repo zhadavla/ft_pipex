@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzhadan <vzhadan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mnurlybe <mnurlybe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 20:29:17 by vzhadan           #+#    #+#             */
-/*   Updated: 2023/08/08 20:40:56 by vzhadan          ###   ########.fr       */
+/*   Updated: 2023/08/10 17:19:41 by mnurlybe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-int	open_file(char *filename, BOOL is_heredoc, BOOL is_input)
+int	open_file(char *filename, int is_heredoc, int is_input)
 {
 	if (is_heredoc && !is_input)
 		return (open(filename, O_WRONLY | O_CREAT | O_APPEND, 0777));

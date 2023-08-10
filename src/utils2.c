@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzhadan <vzhadan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mnurlybe <mnurlybe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 17:55:03 by mnurlybe          #+#    #+#             */
-/*   Updated: 2023/08/08 20:40:20 by vzhadan          ###   ########.fr       */
+/*   Updated: 2023/08/10 17:19:41 by mnurlybe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	**get_binaries(char **env)
 	return (NULL);
 }
 
-BOOL	ft_execute(char *str, char **env)
+int	ft_execute(char *str, char **env)
 {
 	char	**cmd;
 	char	**path;

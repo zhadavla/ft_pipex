@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   error_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzhadan <vzhadan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mnurlybe <mnurlybe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 20:40:15 by vzhadan           #+#    #+#             */
-/*   Updated: 2023/08/08 20:40:16 by vzhadan          ###   ########.fr       */
+/*   Updated: 2023/08/10 17:19:41 by mnurlybe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-BOOL	command_check(char *str, char **env)
+int	command_check(char *str, char **env)
 {
 	char	**cmd;
 	char	**path;
