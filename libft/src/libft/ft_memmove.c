@@ -1,31 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnurlybe <mnurlybe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/28 16:55:36 by mnurlybe          #+#    #+#             */
+/*   Created: 2023/01/17 17:55:39 by mnurlybe          #+#    #+#             */
 /*   Updated: 2023/08/15 16:57:52 by mnurlybe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
+/*
+ *	Copies {n} bytes from memory area {src} to memory area {dest}. 
+ *	The memory areas may overlap!
+ *	Returns a pointer to {dest}.
+*/
+void	*ft_memmove(void *dest, const void *src, size_t n)
+{
+	char	*d;
+	char	*s;
+	size_t	i;
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
-# endif
-
-char	*ft_strjoin(char *s1, char *s2);
-void	*ft_calloc(size_t nmemb, size_t size);
-size_t	ft_strlen(const char *s);
-char	*ft_strchr(const char *s, int c);
-char	*cut_unfin_line(char *uf_line);
-char	*get_lefted_str(char *uf_line, char *lefted);
-char	*get_next_line(int fd);
-
-#endif
+	i = 0;
+	d = (char *)dest;
+	s = (char *)src;
+	if (!dest && !src)
+		return (NULL);
+	if (dest > src)
+		while (n--)
+			*(d + n) = *(s + n);
+	else
+	{
+		while (i < n)
+		{
+			*(d + i) = *(s + i);
+			i++;
+		}
+	}
+	return (dest);
+}

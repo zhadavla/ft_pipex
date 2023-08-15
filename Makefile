@@ -3,12 +3,13 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vzhadan <vzhadan@student.42.fr>            +#+  +:+       +#+         #
+#    By: mnurlybe <mnurlybe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/08/02 18:59:24 by vzhadan           #+#    #+#              #
-#    Updated: 2023/08/08 20:07:15 by vzhadan          ###   ########.fr        #
+#    Created: 2023/08/15 16:53:26 by mnurlybe          #+#    #+#              #
+#    Updated: 2023/08/15 16:53:31 by mnurlybe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 NAME = pipex
 
@@ -17,16 +18,15 @@ SRC_DIR = src
 SOURCES = $(wildcard $(SRC_DIR)/*.c)
 
 CFLAGS = -Wall -Wextra -Werror
-LIBFLAGS = -L./lib -lft -ldl -lglfw -pthread -lm
+LIBFLAGS = -L./libft -lft -ldl -lglfw -pthread -lm
 MY_HEADER = ./includes/
 
 OBJ_DIR = obj
 OBJECTS = $(addprefix $(OBJ_DIR)/,$(notdir $(SOURCES:.c=.o)))
 
-
 .PHONY: all clean fclean re
 
-all: $(NAME)
+all: libftcc $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	gcc $(CFLAGS) -I $(MY_HEADER) $(PRINTF) -c $< -o $@
@@ -37,6 +37,9 @@ $(NAME): $(OBJECTS)
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
+libftcc:
+	make -C libft
+	
 clean:
 	rm -rf $(OBJ_DIR)
 

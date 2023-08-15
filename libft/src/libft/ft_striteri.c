@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc.c                                          :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnurlybe <mnurlybe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/15 16:57:30 by mnurlybe          #+#    #+#             */
-/*   Updated: 2023/08/15 16:59:37 by mnurlybe         ###   ########.fr       */
+/*   Created: 2023/01/27 19:08:48 by mnurlybe          #+#    #+#             */
+/*   Updated: 2023/08/15 16:57:52 by mnurlybe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "libft.h"
 
-void	heredoc(t_pipex *pipex)
+/*
+ *	Applies the function {f} on each character of
+ *	the string passed as argument, passing its index
+ *	as first argument. Each character is passed by
+ *	address to {f} to be modified if necessary.
+*/
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	char	*line;
+	size_t	i;
 
-	while (1)
+	if (!s)
+		return ;
+	i = 0;
+	while (s[i])
 	{
-		ft_printf("heredoc> ");
-		line = get_next_line(0);
-		if (!line)
-			break ;
-		if (!ft_strncmp(line, pipex->limiter, ft_strlen(pipex->limiter)))
-		{
-			free(line);
-			break ;
-		}
-		write(pipex->fd_pipes[1], line, ft_strlen(line));
-		free(line);
+		f(i, &s[i]);
+		i++;
 	}
 }

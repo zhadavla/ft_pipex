@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnurlybe <mnurlybe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/28 16:55:36 by mnurlybe          #+#    #+#             */
+/*   Created: 2023/01/27 20:24:53 by mnurlybe          #+#    #+#             */
 /*   Updated: 2023/08/15 16:57:52 by mnurlybe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
+/*
+ *	Allocates with malloc() and returns a new node.
+ *	The member variable {content} is initialized with
+ *	the value of the parameter {content}. The variable
+ *	{next} is initialized to NULL.
+*/
+t_list	*ft_lstnew(void *content)
+{
+	t_list	*new_node;
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
-# endif
-
-char	*ft_strjoin(char *s1, char *s2);
-void	*ft_calloc(size_t nmemb, size_t size);
-size_t	ft_strlen(const char *s);
-char	*ft_strchr(const char *s, int c);
-char	*cut_unfin_line(char *uf_line);
-char	*get_lefted_str(char *uf_line, char *lefted);
-char	*get_next_line(int fd);
-
-#endif
+	new_node = (t_list *)malloc(sizeof(t_list));
+	if (!new_node)
+		return (NULL);
+	new_node->next = NULL;
+	new_node->content = content;
+	return (new_node);
+}

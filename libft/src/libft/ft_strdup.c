@@ -1,31 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnurlybe <mnurlybe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/28 16:55:36 by mnurlybe          #+#    #+#             */
+/*   Created: 2023/01/18 18:15:52 by mnurlybe          #+#    #+#             */
 /*   Updated: 2023/08/15 16:57:52 by mnurlybe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
+/*
+ *	This function returns a pointer to a null-terminated byte string,
+ *	which is a duplicate of the string pointed to by {s}. 
+ *	The memory obtained is done dynamically using malloc 
+ *	and hence it can be freed using free(). 
+*/
+char	*ft_strdup(const char *s)
+{
+	char	*new_str;
+	size_t	len;
+	size_t	i;
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
-# endif
-
-char	*ft_strjoin(char *s1, char *s2);
-void	*ft_calloc(size_t nmemb, size_t size);
-size_t	ft_strlen(const char *s);
-char	*ft_strchr(const char *s, int c);
-char	*cut_unfin_line(char *uf_line);
-char	*get_lefted_str(char *uf_line, char *lefted);
-char	*get_next_line(int fd);
-
-#endif
+	i = 0;
+	len = ft_strlen(s);
+	new_str = malloc(sizeof(char) * len + 1);
+	if (!new_str)
+		return (NULL);
+	while (i <= len)
+	{
+		*(new_str + i) = (char )s[i];
+		i++;
+	}
+	*(new_str + len) = 0;
+	return (new_str);
+}

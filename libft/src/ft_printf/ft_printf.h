@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
-# include "libft.h"
+# include "../libft/libft.h"
 
 typedef struct flags
 {

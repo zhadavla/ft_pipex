@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc.c                                          :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnurlybe <mnurlybe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/15 16:57:30 by mnurlybe          #+#    #+#             */
-/*   Updated: 2023/08/15 16:59:37 by mnurlybe         ###   ########.fr       */
+/*   Created: 2023/01/16 16:20:33 by mnurlybe          #+#    #+#             */
+/*   Updated: 2023/08/15 16:57:52 by mnurlybe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "libft.h"
 
-void	heredoc(t_pipex *pipex)
+/*
+ *	Fills the first {n} bytes of the memory
+ *	area pointed to by {s} with the constant byte {c}.
+ *	Returns {s};
+*/
+void	*ft_memset(void *s, int c, size_t n)
 {
-	char	*line;
+	unsigned char	*ptr;
 
-	while (1)
-	{
-		ft_printf("heredoc> ");
-		line = get_next_line(0);
-		if (!line)
-			break ;
-		if (!ft_strncmp(line, pipex->limiter, ft_strlen(pipex->limiter)))
-		{
-			free(line);
-			break ;
-		}
-		write(pipex->fd_pipes[1], line, ft_strlen(line));
-		free(line);
-	}
+	ptr = (unsigned char *)s;
+	while (n--)
+		*(ptr++) = (unsigned char)c;
+	return (s);
 }

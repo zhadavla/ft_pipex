@@ -1,31 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnurlybe <mnurlybe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/28 16:55:36 by mnurlybe          #+#    #+#             */
+/*   Created: 2023/03/09 20:18:04 by mnurlybe          #+#    #+#             */
 /*   Updated: 2023/08/15 16:57:52 by mnurlybe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "ft_printf.h"
 
-# include <stdlib.h>
-# include <unistd.h>
+void	ft_init_flags(t_flags *flags)
+{
+	flags->is_negative = 0;
+	flags->is_dash = 0;
+	flags->is_zero = 0;
+	flags->is_dot = 0;
+	flags->is_hash = 0;
+	flags->is_space = 0;
+	flags->is_plus = 0;
+	flags->width = 0;
+	flags->pr_width = 0;
+}
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
-# endif
+void	ft_init_specifiers(t_specifiers *sp)
+{
+	sp->c = 0;
+	sp->s = 0;
+	sp->d = 0;
+	sp->i = 0;
+	sp->u = 0;
+	sp->x = 0;
+	sp->xcap = 0;
+	sp->p = 0;
+	sp->percent = 0;
+}
 
-char	*ft_strjoin(char *s1, char *s2);
-void	*ft_calloc(size_t nmemb, size_t size);
-size_t	ft_strlen(const char *s);
-char	*ft_strchr(const char *s, int c);
-char	*cut_unfin_line(char *uf_line);
-char	*get_lefted_str(char *uf_line, char *lefted);
-char	*get_next_line(int fd);
-
-#endif
+void	ft_init(t_flags *f, t_specifiers *sp)
+{
+	ft_init_flags(f);
+	ft_init_specifiers(sp);
+}

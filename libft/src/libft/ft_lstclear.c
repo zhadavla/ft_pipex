@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnurlybe <mnurlybe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/28 16:55:36 by mnurlybe          #+#    #+#             */
+/*   Created: 2023/01/27 21:02:18 by mnurlybe          #+#    #+#             */
 /*   Updated: 2023/08/15 16:57:52 by mnurlybe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
+/*
+ *	Deletes and frees the given node and every
+ *	successor of that node, using the function ’del’ and free().
+ *	The pointer to the list must be set to NULL.
+*/
+void	ft_lstclear(t_list **lst, void (*del)(void*))
+{
+	t_list	*current;
+	t_list	*next;
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
-# endif
-
-char	*ft_strjoin(char *s1, char *s2);
-void	*ft_calloc(size_t nmemb, size_t size);
-size_t	ft_strlen(const char *s);
-char	*ft_strchr(const char *s, int c);
-char	*cut_unfin_line(char *uf_line);
-char	*get_lefted_str(char *uf_line, char *lefted);
-char	*get_next_line(int fd);
-
-#endif
+	if (!lst || !del)
+		return ;
+	current = *lst;
+	while (current)
+	{
+		next = current->next;
+		ft_lstdelone(current, del);
+		current = next;
+	}
+	*lst = NULL;
+}

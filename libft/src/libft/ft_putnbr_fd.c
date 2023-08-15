@@ -1,33 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc.c                                          :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnurlybe <mnurlybe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/15 16:57:30 by mnurlybe          #+#    #+#             */
-/*   Updated: 2023/08/15 16:59:37 by mnurlybe         ###   ########.fr       */
+/*   Created: 2023/01/27 19:20:32 by mnurlybe          #+#    #+#             */
+/*   Updated: 2023/08/15 16:57:52 by mnurlybe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "libft.h"
 
-void	heredoc(t_pipex *pipex)
+/*
+ *	Outputs the integer {n} to the given file descriptor {fd}.
+*/
+void	ft_putnbr_fd(int n, int fd)
 {
-	char	*line;
-
-	while (1)
+	if (n == -2147483648)
 	{
-		ft_printf("heredoc> ");
-		line = get_next_line(0);
-		if (!line)
-			break ;
-		if (!ft_strncmp(line, pipex->limiter, ft_strlen(pipex->limiter)))
-		{
-			free(line);
-			break ;
-		}
-		write(pipex->fd_pipes[1], line, ft_strlen(line));
-		free(line);
+		write(fd, "-2147483648", 11);
+		return ;
 	}
+	if (n < 0)
+	{
+		n *= -1;
+		write(fd, "-", 1);
+	}
+	if (n >= 10)
+	{
+		ft_putnbr_fd(n / 10, fd);
+		ft_putnbr_fd(n % 10, fd);
+	}
+	else
+		ft_putchar_fd(n + '0', fd);
 }

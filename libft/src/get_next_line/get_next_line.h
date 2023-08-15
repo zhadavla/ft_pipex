@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc.c                                          :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnurlybe <mnurlybe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/15 16:57:30 by mnurlybe          #+#    #+#             */
-/*   Updated: 2023/08/15 16:59:37 by mnurlybe         ###   ########.fr       */
+/*   Created: 2023/01/31 17:00:27 by mnurlybe          #+#    #+#             */
+/*   Updated: 2023/08/15 17:02:22 by mnurlybe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-void	heredoc(t_pipex *pipex)
-{
-	char	*line;
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
 
-	while (1)
-	{
-		ft_printf("heredoc> ");
-		line = get_next_line(0);
-		if (!line)
-			break ;
-		if (!ft_strncmp(line, pipex->limiter, ft_strlen(pipex->limiter)))
-		{
-			free(line);
-			break ;
-		}
-		write(pipex->fd_pipes[1], line, ft_strlen(line));
-		free(line);
-	}
-}
+# include "../libft/libft.h"
+# include <stdlib.h>
+# include <unistd.h>
+
+char	*get_next_line(int fd);
+char	*get_tmp(int fd, char *tmp);
+char	*get_line(char *tmp);
+char	*clean_tmp(char *tmp);
+int		is_strchr(char *s, char c);
+
+char	*ft_strjoin(char *tmp, char *buf);
+
+#endif

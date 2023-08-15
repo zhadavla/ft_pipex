@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc.c                                          :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnurlybe <mnurlybe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/15 16:57:30 by mnurlybe          #+#    #+#             */
-/*   Updated: 2023/08/15 16:59:37 by mnurlybe         ###   ########.fr       */
+/*   Created: 2023/01/18 18:02:18 by mnurlybe          #+#    #+#             */
+/*   Updated: 2023/08/15 16:57:52 by mnurlybe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "libft.h"
 
-void	heredoc(t_pipex *pipex)
+/*
+ *	Allocates the requested memory and returns a pointer to it.
+ *	Sets allocated memory to zero.
+*/
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	char	*line;
+	char	*p;
 
-	while (1)
-	{
-		ft_printf("heredoc> ");
-		line = get_next_line(0);
-		if (!line)
-			break ;
-		if (!ft_strncmp(line, pipex->limiter, ft_strlen(pipex->limiter)))
-		{
-			free(line);
-			break ;
-		}
-		write(pipex->fd_pipes[1], line, ft_strlen(line));
-		free(line);
-	}
+	p = NULL;
+	p = (char *)malloc(nmemb * size);
+	if (!p)
+		return (NULL);
+	ft_bzero(p, size * nmemb);
+	return (p);
 }

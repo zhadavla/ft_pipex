@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnurlybe <mnurlybe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/02 18:06:43 by vzhadan           #+#    #+#             */
-/*   Updated: 2023/08/10 17:19:41 by mnurlybe         ###   ########.fr       */
+/*   Created: 2023/08/02 18:06:43 by mnurlybe          #+#    #+#             */
+/*   Updated: 2023/08/15 16:59:29 by mnurlybe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 
 # define TRUE 1
 # define FALSE 0
-//# define int int
 
 typedef struct s_pipex
 {
@@ -41,7 +40,7 @@ typedef struct s_pipex
 	int		outfile_fd;
 	int		*fd_pipes;
 	int		fd_ind;
-	int	is_heredoc;
+	int		is_heredoc;
 	char	*infile_name;
 	char	*outfile_name;
 	char	*limiter;
@@ -52,7 +51,7 @@ typedef struct s_pipex
  * from the PATH variable in the environment
  */
 char		**get_binaries(char **env);
-int		ft_execute(char *argv, char **env);
+int			ft_execute(char *argv, char **env);
 char		*ft_join(char const *s1, char const *s2);
 int			ft_dup2(int fd1, int fd2);
 void		close_fd(t_pipex *pipex);
@@ -65,5 +64,5 @@ void		ft_close(t_pipex *pipex);
 char		*ft_join(char const *s1, char const *s2);
 char		**create_cmd_list(char **argv, int argc, t_pipex *pipex);
 int			check_argv(char **argv, int argc, t_pipex *pipex, char **env);
-int		command_check(char *str, char **env);
+int			command_check(char *str, char **env);
 #endif
