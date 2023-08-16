@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnurlybe <mnurlybe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vzhadan <vzhadan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/05 13:14:44 by mnurlybe          #+#    #+#             */
-/*   Updated: 2023/08/15 16:56:45 by mnurlybe         ###   ########.fr       */
+/*   Created: 2023/08/16 19:57:42 by vzhadan           #+#    #+#             */
+/*   Updated: 2023/08/16 20:00:16 by vzhadan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ int	do_fork_names(t_pipex *pipex, int mode, char *cmd, char **env)
 			dup_check = ft_dup2(pipex->infile_fd, pipex->fd_pipes[1]);
 		if (mode == MID_FORK)
 			dup_check = ft_dup2(pipex->fd_pipes[pipex->fd_ind], \
-				pipex->fd_pipes[pipex->fd_ind + 3]);
+			pipex->fd_pipes[pipex->fd_ind + 3]);
 		if (pipex->is_heredoc && mode == LAST_FORK)
 			dup_check = ft_dup2(pipex->fd_pipes[2], pipex->outfile_fd);
 		else if (mode == LAST_FORK)
 			dup_check = ft_dup2(pipex->fd_pipes[pipex->fd_ind], \
-				pipex->outfile_fd);
+			pipex->outfile_fd);
 		close_fd(pipex);
 		if (dup_check == -1)
 			return (dup_check);
