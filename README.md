@@ -28,8 +28,6 @@ Should behave like:
 
 # Approach
 
-## Step 1. 
-
 1. Create and initialize t_pipex struct that will store following information:
 
 ```C
